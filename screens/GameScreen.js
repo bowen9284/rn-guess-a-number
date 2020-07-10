@@ -53,6 +53,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     );
 
     setCurrentGuess(nextNumber);
+    
     setRounds((curRounds) => curRounds + 1);
   };
 
