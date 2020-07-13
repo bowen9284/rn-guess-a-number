@@ -8,7 +8,7 @@ const TitleText = (props) => {
 export default TitleText;
 
 const styles = StyleSheet.create({
-  body: {
+  title: {
     fontFamily: 'open-sans-bold',
     fontSize: 18,
   },
