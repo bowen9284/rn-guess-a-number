@@ -5,8 +5,8 @@ import {
   StyleSheet,
   Platform,
   Alert,
-  ScrollView,
   FlatList,
+  Dimensions,
 } from 'react-native';
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -128,14 +128,14 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20,
+    marginTop: Dimensions.get('window').height > 600 ? 20 : 5,
     marginHorizontal: 20,
     width: 300,
     maxWidth: '70%',
   },
   listContainer: {
     flex: 1,
-    width: '60%',
+    width: Dimensions.get('window').width > 350 ? '60%' : '80%',
   },
   list: {
     flexGrow: 1,
