@@ -6,6 +6,7 @@ import {
   Platform,
   Alert,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
@@ -25,17 +26,17 @@ const generateRandomBetween = (min, max, exclude) => {
   }
 };
 
-const renderListItem = (value, numOfRound) => (
-  <View key={value} style={styles.listItem}>
-    <BodyText>#{numOfRound}</BodyText>
-    <BodyText>{value}</BodyText>
+const renderListItem = (listLength, itemData) => (
+  <View style={styles.listItem}>
+    <BodyText>#{listLength - itemData.index}</BodyText>
+    <BodyText>{itemData.item}</BodyText>
   </View>
 );
 
 const GameScreen = ({ userNumber, onGameOver }) => {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
-  const [pastGuesses, setPastGuesses] = useState([initialGuess]);
+  const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
 
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
@@ -70,7 +71,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     );
 
     setCurrentGuess(nextNumber);
-    setPastGuesses((pastGuesses) => [nextNumber, ...pastGuesses]);
+    setPastGuesses((pastGuesses) => [nextNumber.toString(), ...pastGuesses]);
   };
 
   let platFormIcons = {
@@ -101,12 +102,18 @@ const GameScreen = ({ userNumber, onGameOver }) => {
           {platFormIcons.greater}
         </MainButton>
       </Card>
-      <View style={styles.list}>
-        <ScrollView>
+      <View style={styles.listContainer}>
+        {/* <ScrollView contentContainerStyle={styles.list}>
           {pastGuesses.map((guess, index) =>
             renderListItem(guess, pastGuesses.length - index)
           )}
-        </ScrollView>
+        </ScrollView> */}
+        <FlatList
+          keyExtractor={(item) => item}
+          data={pastGuesses}
+          renderItem={renderListItem.bind(this, pastGuesses.length)}
+          contentContainerStyle={styles.list}
+        />
       </View>
     </View>
   );
@@ -126,9 +133,13 @@ const styles = StyleSheet.create({
     width: 300,
     maxWidth: '70%',
   },
-  list: {
+  listContainer: {
     flex: 1,
-    width: '80%',
+    width: '60%',
+  },
+  list: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
   },
   listItem: {
     borderColor: '#ccc',
@@ -138,6 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '100%',
   },
 });
 
