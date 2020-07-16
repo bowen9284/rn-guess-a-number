@@ -68,7 +68,7 @@ const StartGameScreen = (props) => {
   let confirmedOutput;
   if (confirmed) {
     confirmedOutput = (
-      <Card customStyles={styles.summaryContainer}>
+      <Card style={styles.summaryContainer}>
         <Text>You selected</Text>
         <NumberContainer>{selectedNumber}</NumberContainer>
         <MainButton onPress={() => props.onStartGame(selectedNumber)}>
@@ -87,11 +87,11 @@ const StartGameScreen = (props) => {
           }}
         >
           <View style={styles.screen}>
-            <TitleText customStyle={styles.title}>The Game Screen!</TitleText>
-            <Card customStyles={styles.inputContainer}>
+            <TitleText style={styles.title}>The Game Screen!</TitleText>
+            <Card style={styles.inputContainer}>
               <BodyText>Select a Number</BodyText>
               <Input
-                customStyles={styles.input}
+                style={styles.input}
                 blurOnSubmit
                 autoCapitalize="none"
                 autoCorrect={false}

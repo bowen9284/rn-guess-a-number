@@ -7,7 +7,7 @@ const Input = (props) => {
       {...props}
       style={{
         ...styles.input,
-        ...props.customStyles,
+        ...props.style,
       }}
     />
   );

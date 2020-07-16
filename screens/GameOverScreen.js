@@ -14,28 +14,30 @@ import MainButton from '../components/MainButton';
 
 const GameOverScreen = (props) => {
   return (
-    <ScrollView contentContainerStyle={styles.screen}>
-      <TitleText>Game Over!</TitleText>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          // source={{
-          //   uri:
-          //     'https://mariacollege.edu/wp-content/uploads/2018/03/mountaintop-1200x676.jpg',
-          // }}
-          resizeMode="cover"
-          source={require('../assets/success.png')}
-        />
+    <ScrollView>
+      <View style={styles.screen}>
+        <TitleText>Game Over!</TitleText>
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.image}
+            // source={{
+            //   uri:
+            //     'https://mariacollege.edu/wp-content/uploads/2018/03/mountaintop-1200x676.jpg',
+            // }}
+            resizeMode="cover"
+            source={require('../assets/success.png')}
+          />
+        </View>
+        <View style={styles.resultsContainer}>
+          <BodyText style={styles.resultText}>
+            Your phone needed
+            <Text style={styles.highlightText}> {props.numOfRounds}</Text> to
+            guess the number. Your number was
+            <Text style={styles.highlightText}> {props.userNumber}</Text>
+          </BodyText>
+        </View>
+        <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
       </View>
-      <View style={styles.resultsContainer}>
-        <BodyText style={styles.resultText}>
-          Your phone needed
-          <Text style={styles.highlightText}> {props.numOfRounds}</Text> to
-          guess the number. Your number was
-          <Text style={styles.highlightText}> {props.userNumber}</Text>
-        </BodyText>
-      </View>
-      <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
     </ScrollView>
   );
 };

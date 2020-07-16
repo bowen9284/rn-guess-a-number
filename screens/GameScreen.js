@@ -14,6 +14,7 @@ import Card from '../components/Card';
 import MainButton from '../components/MainButton';
 import { Ionicons } from '@expo/vector-icons';
 import BodyText from '../components/BodyText';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -35,12 +36,15 @@ const renderListItem = (listLength, itemData) => (
 );
 
 const GameScreen = ({ userNumber, onGameOver }) => {
+  // ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
   const [deviceHeight, setDeviceHeight] = useState(
     Dimensions.get('window').height
   );
+
   const [deviceWidth, setDeviceWidth] = useState(
     Dimensions.get('window').width
   );
@@ -148,7 +152,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     <View style={styles.screen}>
       <Text>Opponent's Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <Card customStyles={styles.buttonContainer}>
+      <Card style={styles.buttonContainer}>
         <MainButton onPress={nextGuessHandler.bind(this, 'lower')}>
           {platFormIcons.lower}
         </MainButton>
